@@ -17,7 +17,7 @@ interface CharacterDao {
     suspend fun insertAll(characters: List<Character>)
 
     @Query("SELECT * FROM character")
-    fun getAllCharacters() : LiveData<List<Character>>
+    fun getCharacters() : LiveData<List<Character>>
 
     @Query("SELECT * FROM character WHERE id = :id")
     fun getCharacter(id: Int): LiveData<Character>
