@@ -8,9 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
-import com.ennoblesoft.rickandmorty.data.entities.Character
 import com.ennoblesoft.rickandmorty.databinding.FragmentCharacterBinding
 import com.ennoblesoft.rickandmorty.utils.Resource
 import com.ennoblesoft.rickandmorty.utils.autoCleared
@@ -24,6 +21,7 @@ class CharacterFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentCharacterBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
         return binding.root
     }
 
@@ -34,27 +32,12 @@ class CharacterFragment : Fragment() {
     }
 
     private fun subscribeToObservers() {
-        viewModel.character.observe(viewLifecycleOwner, Observer {
+        viewModel.characterData.observe(viewLifecycleOwner, Observer {
             when (it.status) {
-                Resource.Status.SUCCESS -> {
-                    bindCharacter(it.data!!)
-                    binding.pbCharacter.visibility = View.GONE
-                    binding.clCharacter.visibility = View.VISIBLE
-                }
+                Resource.Status.SUCCESS -> viewModel.setData(it.data)
                 Resource.Status.ERROR -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                Resource.Status.LOADING -> binding.pbCharacter.visibility = View.VISIBLE
+                Resource.Status.LOADING -> viewModel.isLoading.set(true)
             }
         })
-    }
-
-    private fun bindCharacter(character: Character) {
-        binding.tvName.text = character.name
-        binding.tvSpecies.text = character.species
-        binding.tvStatus.text = character.status
-        binding.tvGender.text = character.gender
-        Glide.with(binding.root)
-            .load(character.image)
-            .transform(CircleCrop())
-            .into(binding.image)
     }
 }
