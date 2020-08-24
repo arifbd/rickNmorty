@@ -9,6 +9,6 @@
         android:id="@+id/fragmentCharacter"
         android:name="com.ennoblesoft.rickandmorty.ui.characters.CharactersFragment"
         android:label="Characters"
-        tools:layout="@layout/characters_fragment" />
+        tools:layout="@layout/fragment_characters" />
 
 </navigation>

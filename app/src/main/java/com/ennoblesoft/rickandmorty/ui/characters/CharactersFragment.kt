@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ennoblesoft.rickandmorty.databinding.CharactersFragmentBinding
+import com.ennoblesoft.rickandmorty.databinding.FragmentCharactersBinding
 import com.ennoblesoft.rickandmorty.ui.listener.ItemClickListener
 import com.ennoblesoft.rickandmorty.utils.Resource
 import com.ennoblesoft.rickandmorty.utils.autoCleared
@@ -18,12 +18,12 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CharactersFragment : Fragment(), ItemClickListener {
 
-    private var binding: CharactersFragmentBinding by autoCleared()
+    private var binding: FragmentCharactersBinding by autoCleared()
     private val viewModel: CharactersViewModel by viewModels()
     private lateinit var adapter: CharacterAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = CharactersFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentCharactersBinding.inflate(inflater, container, false)
         return binding.root
     }
 
