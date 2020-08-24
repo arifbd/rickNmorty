@@ -10,7 +10,7 @@ object ImageViewBind {
     @JvmStatic
     @BindingAdapter("android:photoUrl")
     fun showImageFromUrlUsingGlide(imageView: ImageView, url: String? = null) {
-        if (url==null) return
+        if (url == null) return
         Glide.with(imageView.context)
             .load(url)
             .transform(CircleCrop())
