@@ -1,38 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+    <data>
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
+        <variable
+            name="listener"
+            type="com.ennoblesoft.rickandmorty.ui.listener.ItemClickListener" />
+
+        <variable
+            name="item"
+            type="com.ennoblesoft.rickandmorty.data.entities.Character" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_toEndOf="@id/image"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Name" />
+        android:onClick="@{()->listener.onItemClicked(item.id)}"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/tv_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_name"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_toEndOf="@id/image"
-        tools:text="Status" />
-</RelativeLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:photoUrl="@{item.image}" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/image"
+            android:text="@{item.name}"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Name" />
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/image"
+            android:text="@{item.status}"
+            tools:text="Status" />
+    </RelativeLayout>
+</layout>
