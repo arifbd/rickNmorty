@@ -47,7 +47,7 @@ class CharactersFragment : Fragment(), ItemClickListener {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
                     binding.pbCharacters.visibility = View.GONE
-                    if (!it.data.isNullOrEmpty()) adapter.setItems(ArrayList(it.data))
+                    if (!it.data!!.results.isNullOrEmpty()) adapter.setItems(ArrayList(it.data.results))
                 }
                 Resource.Status.ERROR -> Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                 Resource.Status.LOADING -> binding.pbCharacters.visibility = View.VISIBLE

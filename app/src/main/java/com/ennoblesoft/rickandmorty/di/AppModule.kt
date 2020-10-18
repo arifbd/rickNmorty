@@ -1,7 +1,6 @@
 package com.ennoblesoft.rickandmorty.di
 
 import android.content.Context
-import com.ennoblesoft.rickandmorty.data.local.dao.CharacterDao
 import com.ennoblesoft.rickandmorty.data.local.db.AppDatabase
 import com.ennoblesoft.rickandmorty.data.remote.CharacterRemoteDataSource
 import com.ennoblesoft.rickandmorty.data.remote.CharacterService
@@ -53,8 +52,7 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRepository(
-        remoteDataSource: CharacterRemoteDataSource,
-        localDataSource: CharacterDao
-    ) = CharacterRepository(remoteDataSource, localDataSource)
+        remoteDataSource: CharacterRemoteDataSource
+    ) = CharacterRepository(remoteDataSource)
 
 }
